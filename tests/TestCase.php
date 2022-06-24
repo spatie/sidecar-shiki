@@ -1,36 +1,36 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Spatie\SidecarShiki\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Hammerstone\Sidecar\Providers\SidecarServiceProvider;
+use Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Spatie\SidecarShiki\Functions\HighlightFunction;
+use Spatie\SidecarShiki\SidecarShikiServiceProvider;
 
 class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
+    protected $loadEnvironmentVariables = true;
 
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            SidecarShikiServiceProvider::class,
+            SidecarServiceProvider::class,
         ];
     }
 
     public function getEnvironmentSetUp($app)
     {
-        config()->set('database.default', 'testing');
+        $app->useEnvironmentPath(__DIR__.'/..');
+        $app->bootstrapWith([LoadEnvironmentVariables::class]);
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        $migration->up();
-        */
+        config()->set('sidecar.functions', [HighlightFunction::class]);
+        config()->set('sidecar.env', 'testing');
+        config()->set('sidecar.aws_key', env('SIDECAR_ACCESS_KEY_ID'));
+        config()->set('sidecar.aws_secret', env('SIDECAR_SECRET_ACCESS_KEY'));
+        config()->set('sidecar.aws_region', env('SIDECAR_REGION'));
+        config()->set('sidecar.aws_bucket', env('SIDECAR_ARTIFACT_BUCKET_NAME'));
+        config()->set('sidecar.execution_role', env('SIDECAR_EXECUTION_ROLE'));
     }
 }
