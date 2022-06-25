@@ -4,7 +4,10 @@
     "keywords": [
         "spatie",
         "laravel",
-        "sidecar-shiki"
+        "sidecar",
+        "shiki",
+        "highlighter",
+        "commonmark"
     ],
     "homepage": "https://github.com/spatie/sidecar-shiki",
     "license": "MIT",

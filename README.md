@@ -115,6 +115,30 @@ SidecarShiki::highlight(
 
 You can then target these classes in your own CSS to color these lines how you want.
 
+### Using the Commonmark HighlightCodeExtension
+
+Here's how we can create a function that can convert markdown to HTML with all code snippets highlighted. Inside the function we'll create a new MarkdownConverter that uses the HighlightCodeExtension provided by this package.
+
+The `$theme` argument on `HighlightCodeExtension` expects the name of [one of the many themes](https://github.com/shikijs/shiki/blob/master/docs/themes.md) that Shiki supports.
+
+```php
+use League\CommonMark\Environment\Environment;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\MarkdownConverter;
+use Spatie\SidecarShiki\Commonmark\HighlightCodeExtension;
+
+function convertToHtml(string $markdown, string $theme): string
+{
+    $environment = (new Environment())
+        ->addExtension(new CommonMarkCoreExtension())
+        ->addExtension(new HighlightCodeExtension($theme));
+
+    $markdownConverter = new MarkdownConverter(environment: $environment);
+
+    return $markdownConverter->convertToHtml($markdown);
+}
+```
+
 ## Testing
 
 The testsuite makes connections to AWS and runs the deployed Lambda function. In order to run the testsuite, you will need an active [AWS account](https://aws.amazon.com/).
@@ -159,6 +183,10 @@ Please review [our security policy](../../security/policy) on how to report secu
 - [All Contributors](../../contributors)
 
 Special thanks to [Stefan Zweifel]() for his [sidecar-browsershot](https://github.com/stefanzweifel/sidecar-browsershot) package as a big help in how to test this.
+
+## Alternatives
+
+If you don't want to install and handle Shiki yourself, take a look at [Torchlight](https://torchlight.dev), which can highlight your code with minimal setup.
 
 ## License
 
