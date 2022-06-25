@@ -26,6 +26,7 @@ class FencedCodeRenderer implements NodeRendererInterface
         Node $node,
         ChildNodeRendererInterface $childRenderer
     ): string {
+        /** @var \League\CommonMark\Util\HtmlElement $element */
         $element = $this->baseRenderer->render($node, $childRenderer);
 
         $element->setContents(
@@ -38,8 +39,12 @@ class FencedCodeRenderer implements NodeRendererInterface
         return $element->getContents();
     }
 
-    protected function getSpecifiedLanguage(FencedCode $block): ?string
+    protected function getSpecifiedLanguage(Node $block): ?string
     {
+        if (! $block instanceof FencedCode) {
+            return null;
+        }
+
         $infoWords = $block->getInfoWords();
 
         if (empty($infoWords) || empty($infoWords[0])) {

@@ -24,6 +24,7 @@ class IndentedCodeRenderer implements NodeRendererInterface
         Node $node,
         ChildNodeRendererInterface $childRenderer
     ): string {
+        /** @var \League\CommonMark\Util\HtmlElement $element */
         $element = $this->baseRenderer->render($node, $childRenderer);
 
         $element->setContents(
