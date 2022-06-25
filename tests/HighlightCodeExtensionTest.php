@@ -8,8 +8,7 @@ use League\CommonMark\MarkdownConverter;
 use Spatie\SidecarShiki\Commonmark\HighlightCodeExtension;
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
-it('can_highlight_a_piece_of_fenced_code', function ()
-{
+it('can_highlight_a_piece_of_fenced_code', function () {
     $markdown = <<<MD
     Here is a piece of fenced PHP code
     ```php
@@ -22,8 +21,7 @@ it('can_highlight_a_piece_of_fenced_code', function ()
     assertMatchesSnapshot($highlightedCode);
 });
 
-it('can_highlight_a_piece_of_indented_code', function ()
-{
+it('can_highlight_a_piece_of_indented_code', function () {
     $markdown = <<<MD
     Here is a piece of indented PHP code
 
@@ -36,8 +34,7 @@ it('can_highlight_a_piece_of_indented_code', function ()
     assertMatchesSnapshot($highlightedCode);
 });
 
-it('can_mark_lines_as_highlighted_added_deleted_and_focus', function ()
-{
+it('can_mark_lines_as_highlighted_added_deleted_and_focus', function () {
     $markdown = <<<MD
     Here is a piece of fenced PHP code
     ```php{4,5}{6,7}
