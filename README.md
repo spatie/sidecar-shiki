@@ -8,9 +8,9 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/spatie/sidecar-shiki/Check%20&%20fix%20styling?label=code%20style)](https://github.com/spatie/sidecar-shiki/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/sidecar-shiki.svg?style=flat-square)](https://packagist.org/packages/spatie/sidecar-shiki)
 
-This package allows you to run [Shiki](https://github.com/shikijs/shiki) on AWS Lambda through [Sidecar](https://github.com/hammerstonedev/sidecar).
+[Shiki](https://github.com/shikijs/shiki) is a beautiful syntax highlighter powered by the same language engine that many code editors use.  This package allows you to run [Shiki](https://github.com/shikijs/shiki) on AWS Lambda through [Sidecar](https://github.com/hammerstonedev/sidecar).
 
-You won't need to install Node on your server.
+You won't need to install Node, or any of Shiki's dependencies, on your server.
 
 ## Support us
 
@@ -34,7 +34,7 @@ You can install the package via composer:
 composer require spatie/sidecar-shiki
 ```
 
-You can publish the config file with:
+Optionally, you can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="sidecar-shiki-config"
@@ -73,7 +73,7 @@ SidecarShiki::highlight(
 );
 ```
 
-The output is this chunk of HTML rendered through AWS Lambdad which will output beautifully in the browser:
+The output is this chunk of HTML rendered through AWS Lambda which will output beautifully in the browser:
 
 ```html
 <pre class="shiki" style="background-color: #2e3440ff"><code><span class="line"><span style="color: #81A1C1">&lt;?</span><span style="color: #D8DEE9FF">php </span><span style="color: #81A1C1">echo</span><span style="color: #D8DEE9FF"> </span><span style="color: #ECEFF4">&quot;</span><span style="color: #A3BE8C">Hello World</span><span style="color: #ECEFF4">&quot;</span><span style="color: #81A1C1">;</span><span style="color: #D8DEE9FF"> </span><span style="color: #81A1C1">?&gt;</span></span></code></pre>
