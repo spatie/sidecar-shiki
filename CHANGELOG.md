@@ -2,6 +2,14 @@
 
 All notable changes to `sidecar-shiki` will be documented in this file.
 
+## 1.0 - 2022-06-27
+
+### What's changed
+
+- Stable release!
+
+**Full Changelog**: https://github.com/spatie/sidecar-shiki/compare/0.3.0...1.0
+
 ## 0.3.0 - 2022-06-27
 
 ### What's changed
