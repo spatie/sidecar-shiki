@@ -2,6 +2,14 @@
 
 All notable changes to `sidecar-shiki` will be documented in this file.
 
+## 0.3.0 - 2022-06-27
+
+### What's changed
+
+- Fix theme not being passed correctly
+
+**Full Changelog**: https://github.com/spatie/sidecar-shiki/compare/0.2.0...0.3.0
+
 ## 0.2.0 - 2022-06-25
 
 ### What's changed
