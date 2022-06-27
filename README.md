@@ -179,7 +179,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Rias](https://github.com/spatie)
+- [Rias Van der Veken](https://github.com/spatie)
 - [All Contributors](../../contributors)
 
 Special thanks to [Stefan Zweifel]() for his [sidecar-browsershot](https://github.com/stefanzweifel/sidecar-browsershot) package as a big help in how to test this.
