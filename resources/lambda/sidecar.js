@@ -54,7 +54,7 @@ export const handle = async function (event) {
     }
 
     const language = event.language || 'php';
-    const tokens = highlighter.codeToThemedTokens(event.code, language);
+    const tokens = highlighter.codeToThemedTokens(event.code, language, theme);
     const loadedTheme = highlighter.getTheme(theme);
     const options = event.options || {};
 
