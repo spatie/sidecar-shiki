@@ -6,6 +6,7 @@ use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 use Spatie\SidecarShiki\Commonmark\HighlightCodeExtension;
+
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
 it('can_highlight_a_piece_of_fenced_code', function () {

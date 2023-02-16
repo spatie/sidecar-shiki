@@ -1,6 +1,7 @@
 <?php
 
 use Spatie\SidecarShiki\SidecarShiki;
+
 use function Spatie\Snapshots\assertMatchesSnapshot;
 
 it('can highlight php', function () {
