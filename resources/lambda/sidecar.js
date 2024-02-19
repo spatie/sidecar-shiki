@@ -1,52 +1,45 @@
-import shiki from 'shiki';
-import { renderToHtml } from './renderer.js';
+import * as shiki from 'shiki';
+import * as path from 'path';
+import * as fs from 'fs';
+import {renderToHtml} from "./renderer.js";
+import { fileURLToPath } from 'url';
 
-const customLanguages = [
-    {
-        id: 'antlers',
+const customLanguages = {
+    antlers: {
         scopeName: 'text.html.statamic',
-        path: '../../../languages/antlers.tmLanguage.json',
         embeddedLangs: ['html'],
     },
-    {
-        id: 'blade',
+    blade: {
         scopeName: 'text.html.php.blade',
-        path: '../../../languages/blade.tmLanguage.json',
         embeddedLangs: ['html', 'php'],
     },
-];
+};
 
-let allLanguages = shiki.BUNDLED_LANGUAGES;
-allLanguages.push(...customLanguages);
+const highlighter = await shiki.getHighlighter({});
 
-const languagesToLoad = allLanguages;
-(function loadEmbeddedLangsRecursively() {
-    languagesToLoad.forEach(function (language) {
-        const embeddedLangs = language.embeddedLangs || [];
-        embeddedLangs.forEach(function (languageKey) {
-            if (languagesToLoad.find(lang => lang.id === languageKey || (lang.aliases && lang.aliases.includes(languageKey)))) {
-                return;
-            }
+for (const [lang, spec] of Object.entries(customLanguages)) {
+    for (const embedded of spec.embeddedLangs) {
+        await highlighter.loadLanguage(embedded);
+    }
 
-            languagesToLoad.push(allLanguages.find(lang => lang.id === languageKey || (lang.aliases && lang.aliases.includes(languageKey))));
-            loadEmbeddedLangsRecursively();
-        });
-    });
-})();
+    await highlighter.loadLanguage({ ...spec, ...loadLanguage(lang), name: lang });
+}
 
-const highlighter = await shiki.getHighlighter({
-    langs: languagesToLoad,
-});
+function loadLanguage(language) {
+    const path = getLanguagePath(language);
+    const content = fs.readFileSync(path);
+
+    return JSON.parse(content);
+}
+
+function getLanguagePath(language) {
+    const __filename = fileURLToPath(import.meta.url);
+    const url = path.join(path.dirname(__filename), 'languages', `${language}.tmLanguage.json`);
+
+    return path.normalize(url);
+}
 
 export const handle = async function (event) {
-    if (event.command === 'themes') {
-        return JSON.stringify(shiki.BUNDLED_THEMES);
-    }
-
-    if (event.command === 'languages') {
-        return JSON.stringify(allLanguages);
-    }
-
     let theme = event.theme || 'nord';
 
     if (! highlighter.getLoadedThemes().includes(theme)) {
@@ -54,13 +47,21 @@ export const handle = async function (event) {
     }
 
     const language = event.language || 'php';
-    const tokens = highlighter.codeToThemedTokens(event.code, language, theme);
-    const loadedTheme = highlighter.getTheme(theme);
+
+    if (!customLanguages[language]) await highlighter.loadLanguage(language);
+
+    const { theme: theme$ } = highlighter.setTheme(theme);
+
+    const result = highlighter.codeToTokens(event.code, {
+        theme: theme$,
+        lang: language,
+    });
+
     const options = event.options || {};
 
-    return renderToHtml(tokens, {
-        fg: loadedTheme.fg,
-        bg: loadedTheme.bg,
+    return renderToHtml(result.tokens, {
+        fg: theme$.fg,
+        bg: theme$.bg,
         highlightLines: options.highlightLines,
         addLines: options.addLines,
         deleteLines: options.deleteLines,
