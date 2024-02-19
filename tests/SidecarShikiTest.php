@@ -2,14 +2,14 @@
 
 use Spatie\SidecarShiki\SidecarShiki;
 
-use function Spatie\Snapshots\assertMatchesSnapshot;
+use function Spatie\Snapshots\assertMatchesHtmlSnapshot;
 
 it('can highlight php', function () {
     $code = '<?php echo "Hello World"; ?>';
 
     $highlightedCode = SidecarShiki::highlight($code);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can highlight blade', function () {
@@ -17,7 +17,7 @@ it('can highlight blade', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'blade');
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can highlight complex blade with html inside', function () {
@@ -29,7 +29,7 @@ it('can highlight complex blade with html inside', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'blade', 'github-light');
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can highlight antlers', function () {
@@ -37,7 +37,7 @@ it('can highlight antlers', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'antlers');
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can render for a specific language', function () {
@@ -45,7 +45,7 @@ it('can render for a specific language', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'js');
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can mark lines as highlighted', function () {
@@ -53,7 +53,7 @@ it('can mark lines as highlighted', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, null, null, [1]);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can mark multiple lines as highlighted', function () {
@@ -65,7 +65,7 @@ it('can mark multiple lines as highlighted', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, null, null, ['1', '2-4']);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can mark lines as added', function () {
@@ -73,7 +73,7 @@ it('can mark lines as added', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, null, null, null, [1]);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can mark lines as deleted', function () {
@@ -81,7 +81,7 @@ it('can mark lines as deleted', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'php', null, null, null, [1]);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can mark lines as focus', function () {
@@ -89,7 +89,7 @@ it('can mark lines as focus', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, 'php', null, null, null, null, [1]);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can accept different themes', function () {
@@ -97,7 +97,7 @@ it('can accept different themes', function () {
 
     $highlightedCode = SidecarShiki::highlight($code, null, 'github-light');
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('throws on invalid theme', function () {

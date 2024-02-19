@@ -7,7 +7,7 @@ use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\MarkdownConverter;
 use Spatie\SidecarShiki\Commonmark\HighlightCodeExtension;
 
-use function Spatie\Snapshots\assertMatchesSnapshot;
+use function Spatie\Snapshots\assertMatchesHtmlSnapshot;
 
 it('can_highlight_a_piece_of_fenced_code', function () {
     $markdown = <<<MD
@@ -19,7 +19,7 @@ it('can_highlight_a_piece_of_fenced_code', function () {
 
     $highlightedCode = convertToHtml($markdown);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can_highlight_a_piece_of_indented_code', function () {
@@ -32,7 +32,7 @@ it('can_highlight_a_piece_of_indented_code', function () {
 
     $highlightedCode = convertToHtml($markdown);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 it('can_mark_lines_as_highlighted_added_deleted_and_focus', function () {
@@ -51,7 +51,7 @@ it('can_mark_lines_as_highlighted_added_deleted_and_focus', function () {
 
     $highlightedCode = convertToHtml($markdown);
 
-    assertMatchesSnapshot($highlightedCode);
+    assertMatchesHtmlSnapshot($highlightedCode);
 });
 
 function convertToHtml(string $markdown): string

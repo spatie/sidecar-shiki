@@ -1,3 +1,0 @@
-<pre class="shiki" style="background-color: #ffffff"><code><span class="line"><span style="color: #CF222E">@if</span><span style="color: #24292F">($foo)</span></span>
-<span class="line"><span style="color: #24292F">    &lt;</span><span style="color: #116329">p</span><span style="color: #24292F">&gt;</span><span style="color: #0550AE">{{</span><span style="color: #24292F"> </span><span style="color: #0A3069">&quot;Hello world&quot;</span><span style="color: #24292F"> </span><span style="color: #0550AE">}}</span><span style="color: #24292F">&lt;/</span><span style="color: #116329">p</span><span style="color: #24292F">&gt;</span></span>
-<span class="line"><span style="color: #CF222E">@endif</span></span></code></pre>
