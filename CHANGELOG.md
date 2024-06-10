@@ -2,6 +2,12 @@
 
 All notable changes to `sidecar-shiki` will be documented in this file.
 
+## 1.3.0 - 2024-06-10
+
+* Add L11 support
+
+**Full Changelog**: https://github.com/spatie/sidecar-shiki/compare/1.2.0...1.3.0
+
 ## 1.2.0 - 2024-02-19
 
 ### What's Changed
